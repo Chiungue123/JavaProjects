@@ -36,6 +36,9 @@ public class todo{
                 else{
                     todo.add(task);
                     System.out.println("The tasked called " + task + " has been added");
+                    Thread.sleep(2000);
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                 }
             }
 
@@ -100,12 +103,45 @@ public class todo{
 
             // User can edit a task
             else if (prompt.toLowerCase().equals("e")){
-                // Todo
+                boolean isValid = false; 
+                while (!isValid){
+                    System.out.println("List of tasks");
+                    for (int j = 0; j < todo.size(); j++){
+                        System.out.println((j+1) + ": " + todo.get(j));
+                    } 
+
+                    System.out.println("Name of task to edit");
+                    String oldName = input.next();
+                    for (int i = 0; i < todo.size(); i++){
+                        if (todo.get(i).equals(oldName)){
+                            System.out.println("New task name: ");
+                            String newName = input.next();
+                            System.out.println("Are you sure you want to rename " + oldName + " to " + newName + "?(y/n)");
+                            String confirm = input.next().toLowerCase();
+                            if (confirm.equals("y")){
+                                todo.set(i, newName);
+                                System.out.println("Task successfully renamed to " + newName);
+                                Thread.sleep(2000);
+                                System.out.print("\033[H\033[2J");
+                                System.out.flush();
+                                isValid = true;
+                            }
+                        }
+                    }
+                    if (!isValid){
+                        System.out.println("The task " + oldName + " wasn't found. Enter a valid task name.");
+                        Thread.sleep(3000);
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                    }
+                }
             }
 
             // Allows to quit the program
             else if (prompt.toLowerCase().equals("q")){
             System.out.println("You are quitting the program.");
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             System.exit(0);
         }
     }
