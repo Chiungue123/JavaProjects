@@ -64,7 +64,38 @@ public class todo{
 
             // Allow the user to view the tasks
             else if (prompt.toLowerCase().equals("v")){
-               // Todo
+                System.out.println("List of tasks");
+                for (int j = 0; j < todo.size(); j++){
+                    System.out.println((j+1) + ": " + todo.get(j));
+                }
+                Thread.sleep(3000);
+                boolean isValid = false;
+                while (!isValid){
+                    System.out.println("R - Return to main menu\nQ - Quit program");
+                    String menu = input.next().toLowerCase();
+                    switch (menu){
+                        // This switch statement evaluates the menu expression and executes code blocks based on matching cases
+                        case "r":
+                        // Return to main
+                        isValid = true;
+                        System.out.println("Returning to main menu");
+                        Thread.sleep(2000);
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                        break;
+
+                        case "q":
+                        // Quit program
+                        System.out.println("You are quitting the program.");
+                        Thread.sleep(1000);
+                        System.exit(0);
+
+                        default: 
+                        // Executes when the two cases above didn't match
+                        System.out.println("Invalid input, please try again");
+                        break;
+                    }
+                }
             }
 
             // User can edit a task
