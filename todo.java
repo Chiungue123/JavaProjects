@@ -44,20 +44,30 @@ public class todo{
 
             // User can remove tasks
             else if (prompt.toLowerCase().equals("r")){
-                System.out.println("List of tasks");
-                for (int j = 0; j < todo.size(); j++){
-                    System.out.println((j+1) + ": " + todo.get(j));
-                }
+                boolean isValid = false;
+                while (!isValid){
+                    System.out.println("List of tasks");
+                    for (int j = 0; j < todo.size(); j++){
+                        System.out.println((j+1) + ": " + todo.get(j));
+                    }
 
-                System.out.println("Delete: ");
-                String remove = input.next();
+                    System.out.println("Delete: ");
+                    String remove = input.next();
 
-                for  (int i = 0; i < todo.size(); i++)
-                {
-                    if (todo.get(i).equals(remove))
+                    for  (int i = 0; i < todo.size(); i++)
                     {
-                        todo.remove(i);
-                        System.out.println(remove + " has been removed.");
+                        if (todo.get(i).equals(remove))
+                        {
+                            todo.remove(i);
+                            System.out.println(remove + " has been removed.");
+                            Thread.sleep(2000);
+                            System.out.print("\033[H\033[2J");
+                            System.out.flush();
+                            isValid = true;
+                        }
+                    }
+                    if (!isValid){
+                        System.out.println("Couldn't find the task " + remove + ", enter a valid task name.");
                         Thread.sleep(2000);
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
