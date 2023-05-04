@@ -38,10 +38,28 @@ public class todo{
                     System.out.println("The tasked called " + task + " has been added");
                 }
             }
-            
+
             // User can remove tasks
             else if (prompt.toLowerCase().equals("r")){
-                // Todo
+                System.out.println("List of tasks");
+                for (int j = 0; j < todo.size(); j++){
+                    System.out.println((j+1) + ": " + todo.get(j));
+                }
+
+                System.out.println("Delete: ");
+                String remove = input.next();
+
+                for  (int i = 0; i < todo.size(); i++)
+                {
+                    if (todo.get(i).equals(remove))
+                    {
+                        todo.remove(i);
+                        System.out.println(remove + " has been removed.");
+                        Thread.sleep(2000);
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                    }
+                }
             }
 
             // Allow the user to view the tasks
