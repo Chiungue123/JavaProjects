@@ -30,7 +30,7 @@ public class Book {
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
