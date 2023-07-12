@@ -18,15 +18,15 @@ public class Patron extends Person {
         return this.borrowedBooks;
     }
 
-    public void displayBorrowedBooks(){
-        System.out.println("Borrowed Books:");
-        if (this.borrowedBooks.size() != 0) {
+    public void displayBorrowedBooks() {
+        if (this.borrowedBooks.size() > 0) {
+            System.out.printf("Books borrowed by %s:\n", getName());
             for (Book book : this.borrowedBooks) {
-                System.out.println(book.getName() + " by " + book.getAuthor());
+                System.out.printf("Book: %-20s | Author: %s\n", book.getName(), book.getAuthor());
             }
         }
-        else{
-            System.out.println("No books borrowed.");
+        else {
+            System.out.println("Borrowed Books: None.");
         }
     }
 }

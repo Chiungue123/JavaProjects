@@ -1,21 +1,16 @@
 package LibraryManagement;
 
-import java.util.ArrayList;
 import java.util.List; 
 import java.util.Scanner;
 
 public class Librarian extends Person{
-    // Attributes
-    private static List<Book> books;
 
     Librarian(int id, String name, int age) {
         super(id, name, age); // Calling the constructor of the parent class
-        books = new ArrayList<Book>(); // Initializing the books list
     }
 
-    public void addBook() {
+    public void addBook(Scanner scanner, List<Book> books) {
         boolean exists = false;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the name of the book: ");
         String name = scanner.nextLine();
         System.out.println("Enter the author of the book: ");
@@ -35,11 +30,9 @@ public class Librarian extends Person{
         } else {
             System.out.println("Invalid input.");
         }
-        scanner.close();
     }
 
-    public void removeBook() {
-        Scanner scanner = new Scanner(System.in);
+    public void removeBook(Scanner scanner, List<Book> books) {
         System.out.println("Enter the name of the book: ");
         String name = scanner.nextLine();
         System.out.println("Enter the author of the book: ");

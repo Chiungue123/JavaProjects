@@ -16,6 +16,20 @@ public class Library {
     }
 
     // Methods
+    public boolean canborrow() {
+        //canBorrow = false;
+        if (this.patrons.size() > 0 && this.books.size() > 0) {
+            for (Book book : this.books) {
+                if (book.getIsAvailable()) {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+        return false;
+    }
+
     public Patron createPatron(String name, int age) {
         // Check for duplicates, increment the ID and create a new Patron
         int id = patrons.size() + 1;
@@ -46,33 +60,46 @@ public class Library {
         patrons.remove(patron);
     }
     
-    
     // Getters
+    public List<Book> getBooks() {
+        return this.books;
+    }
+
+    public List<Patron> getPatrons() {
+        return this.patrons;
+    }
+
     public void displayBooks() {
-        if (this.books.size() != 0) {
+        if (books.size() > 0){
+            System.out.println("List of books:");
             for (Book book : this.books) {
-                System.out.println(book.getName() + " by " + book.getAuthor());
+                System.out.printf("%-20s | %-20s | status: %s\n", book.getName(), book.getAuthor(), book.getIsAvailable() ? "Available" : "Borrowed");
             }
+            System.out.println("====================================================================================================");
         }
-        else {
-            System.out.println("No books in the library.");
+        else{
+            System.out.println("No books found.");
         }
     }
 
     public void displayPatrons(){
-        if (this.patrons.size() != 0) {
+        if (patrons.size() > 0){
+            System.out.println("List of patrons:");
             for (Patron patron : this.patrons) {
-                System.out.println(patron.getName() + " with ID " + patron.getId());
+                System.out.printf("Name: %-9s | ID: %-5s | Age: %s\n", patron.getName(), patron.getId(), patron.getAge());
+                patron.displayBorrowedBooks();
+                System.out.println();
             }
+            System.out.println("====================================================================================================");
         }
-        else{
-            System.out.println("No patrons in the library.");
+        else {
+            System.out.println("No patrons found.");
         }
     }
 
     public Book findBookByName(String bookName) {
         for (Book book : books) {
-            if (book.getName().equalsIgnoreCase(bookName) && book.getIsAvailable()) {
+            if (book.getName().equals(bookName)) {
                 return book;
             }
         }
@@ -89,8 +116,7 @@ public class Library {
     }
 
     // Setters
-    public void borrowBook(Patron patron){
-        Scanner scanner = new Scanner(System.in);
+    public void borrowBook(Scanner scanner, Patron patron){
         System.out.println("Enter the name of the book: ");
         String name = scanner.nextLine();
         System.out.println("Enter the author of the book: ");
@@ -103,25 +129,29 @@ public class Library {
                 System.out.println("Book borrowed.");
                 break;
             }
-            System.out.println("Borrowed Books: ");
-            for (Book borrowed: patron.getBorrowedBooks()){
-                System.out.println(borrowed.getName() + " by " + borrowed.getAuthor());
-            }
-        } 
-        scanner.close(); 
+        }
     }
 
-    public void returnBook(Library library) {
-        Scanner scanner = new Scanner(System.in);
+    public void returnBook(Scanner scanner) {
+        // Get the name of the book and the id of the patron
         System.out.println("Enter the name of the book to return: ");
         String name = scanner.nextLine();
-        Book book = library.findBookByName(name);
-        if (book != null && !book.getIsAvailable()) {
+        System.out.println("Enter the id of the patron: ");
+        int patronId = scanner.nextInt();
+        scanner.nextLine();
+
+        // Find the book and the patron
+        Book book = findBookByName(name);
+        Patron patron = findPatronById(patronId);
+
+        // If the book is found and is not available and the patron is found, return the book
+        if (book != null && !book.getIsAvailable() && patron != null) {
             book.setIsAvailable(true);
+            patron.getBorrowedBooks().remove(book);
+            System.out.println("Book returned.");
         } else {
-            System.out.println("No book found with name: " + name + " or the book is already available.");
+            System.out.println("No borrowed book found with name: " + name + " or no patron found with id: " + patronId);
         }
-        scanner.close();
     }
 
     public void setBooks(List<Book> books) {
