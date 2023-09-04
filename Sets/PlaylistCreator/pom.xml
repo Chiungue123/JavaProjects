@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.javaminiprojects</groupId>
+  <artifactId>playlistcreator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Playlist Creator</name>
+  <description>The Playlist Creator project aims to provide a simple yet effective playlist management system utilizing Java's LinkedHashSet data structure. The focus is on ensuring that songs are kept in a particular sequence, while also eliminating any duplicate entries. This hands-on project will serve as a practical exercise for understanding and implementing LinkedHashSet in Java, showcasing not only a grasp of data structures but also demonstrating code quality and design principles. Ideal for portfolio inclusion, this project underscores commitment to mastering foundational Java skills, a key selling point for prospective employers in the software development field.</description>
+</project>

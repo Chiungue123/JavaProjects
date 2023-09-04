@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>JavaMiniProjects</groupId>
+  <artifactId>GymBatchManager</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Gym Batch Manager</name>
+  <description>A Java-based gym management software designed to practice Object Oriented Programming (OOP) concepts. The application focuses on managing Zumba batches and their participants. It utilizes classes, inheritance, and polymorphism to capture real-world entities and relationships, providing a hands-on experience in OOP.</description>
+</project>

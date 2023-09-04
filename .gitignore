@@ -1,0 +1,16 @@
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Mac system files
+.DS_Store
+
+# Compiled byte code
+*.class
+
+# Maven target folder
+target/
+
+# Log Files
+*.log
