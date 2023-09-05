@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.javaminiprojects</groupId>
+  <artifactId>reservation-manager</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Reservation Manager</name>
+  <description>In the Reservation Manager project, I'm getting hands-on experience with Java's LinkedHashSet. This small project is part of my ongoing JavaMiniProjects, and it's where I'll focus on practicing some basic operations with this data structure. It's essentially a simple reservation system that will help me better understand how LinkedHashSet works in Java.</description>
+</project>

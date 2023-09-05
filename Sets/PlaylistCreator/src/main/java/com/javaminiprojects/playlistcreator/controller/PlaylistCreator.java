@@ -8,3 +8,7 @@ public class PlaylistCreator {
 	}
 
 }
+
+// IMPORTANT
+// LinkedHashSet isn't fesable for this project as the iterable interface doesn't support bidirectional traversal'
+// This prevents the use of the previous function when playing songs, different data structure needed
