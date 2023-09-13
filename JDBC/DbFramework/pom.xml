@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.javaminiprojects.jdbc.dbframework</groupId>
+  <artifactId>DatabaseFramework</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Java Database Gateway Framework</name>
+  <description>Java Database Gateway Framework is a foundational architecture designed to simplify Java-to-MySQL database interactions. Built with industry standards and best practices, this framework encapsulates the JDBC boilerplate code, offering a streamlined and efficient way to handle database operations. Leveraging a well-organized package structure and predefined interfaces, it minimizes the complexity in the main application logic, making it easier to build, maintain, and scale your projects. This project is an essential stepping stone for anyone aspiring to specialize in full-stack development, particularly with a focus on backend technologies.</description>
+</project>
