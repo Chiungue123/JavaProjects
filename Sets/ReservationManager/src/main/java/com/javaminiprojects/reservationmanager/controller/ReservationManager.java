@@ -2,22 +2,31 @@ package com.javaminiprojects.reservationmanager.controller;
 
 import java.util.*;
 
-import com.javaminiprojects.reservationmanager.model.Customer;
+import com.javaminiprojects.reservationmanager.model.Reservation;
 
 public class ReservationManager {
 	private static boolean running = true;
 	private static String input;
+	
+	// Define data structure dimensions for calendar
+	final static int DAYS = 7;
+	final static int SLOTS = 5;
+	final static int TABLES = 3;
 
 	public static void main(String[] args) {
 		// Define LinkedHashSet for waiting list and reservations
-		Set<Customer> reservations = new LinkedHashSet<>();
-		Set<Customer> waitlist = new LinkedHashSet<>();
+		Set<Reservation> reservations = new LinkedHashSet<>();
+		Set<Reservation> waitlist = new LinkedHashSet<>();
+		
+		@SuppressWarnings("unchecked")
+		Map<Boolean, Reservation>[][][] calendar = new Map[DAYS][SLOTS][TABLES];
+
 		
 		// Define variables for validating user input
 		boolean valid = false;
 		Scanner scanner = new Scanner(System.in);
 
-		while(running) {
+		while (running) {
 			do {
 				valid = true;
 				System.out.println("========== Menu ==========");
@@ -33,7 +42,7 @@ public class ReservationManager {
 			
 			switch(input) {
 				case "1":
-					viewReservations();
+					viewReservations(calendar);
 					break;
 					
 				case "2":
@@ -54,8 +63,21 @@ public class ReservationManager {
 		System.exit(0);
 	}
 	
-	public static void viewReservations() {
+	public static void viewReservations(Map<Boolean, Reservation>[][][] calendar) {
 		System.out.println("Viewing Reservations");
+		if (reservations.isEmpty()) {
+			System.out.println("No reservations are scheduled at the moment.");
+			clearScreen();
+		} else {
+			for (int day = 0; day < DAYS; day++) {
+				System.out.println("Day " + (day + 1));
+			    for (int slot = 0; slot < SLOTS; slot++) {
+			        for (int table = 0; table < TABLES; table++) {
+			            System.out.println(calendar[day][slot][table]);  
+			        }
+			    }
+			}
+		}
 		// Print method that creates a neatly formatted table
 		// It should represent the available time slots along with the customer details
 		// Reservations should be populated in their respective slot in the table 
@@ -65,7 +87,7 @@ public class ReservationManager {
 	
 	public static void bookReservation() {
 		System.out.println("Booking Reservations");
-		// When a reservation is canceled, automatically offer the spot to the first person on the waiting list.
+		
 		clearScreen();
 	}
 	
@@ -74,7 +96,8 @@ public class ReservationManager {
 		// run viewReservations
 		// Prompt user to select reservation id number, followed by a prompt to edit name, number of people and or time
 		// Option to remove a reservation
-		// Implement a waiting list feature, upon cancellation, automatically offer the spot to the next person on the wait list
+		// Implement a waiting list feature
+		// When a reservation is canceled, automatically offer the spot to the first person on the waiting list.
 		clearScreen();
 	}
 
