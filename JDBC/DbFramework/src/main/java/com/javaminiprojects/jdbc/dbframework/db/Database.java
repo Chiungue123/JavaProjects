@@ -7,12 +7,8 @@ import java.sql.*;
 public class Database implements DataAccessObject {
 	// Constructor
 	public Database () {}
-
-	@SuppressWarnings("null")
 	
-	public void createConnection (String url, String user, String pass) {
-		// TODO Auto-generated method stub
-		Connection con = null;
+	public void createConnection (Connection con, String url, String user, String pass) {
 		try {
 			System.out.println("Attempting database connection");
 			con = DriverManager.getConnection(url, user, pass);
@@ -32,8 +28,14 @@ public class Database implements DataAccessObject {
 	}
 
 	@Override
-	public void closeConnection() {
-		// TODO Auto-generated method stub
+	public void closeConnection(Connection con) {
+		try {
+			con.close();
+		}
+		catch (SQLException e) {
+			System.out.println("Error closing connection: " + e.getMessage());
+			System.out.println("SQL State: " + e.getSQLState());
+		}
 		
 	}
 
