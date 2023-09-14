@@ -4,22 +4,28 @@ import java.util.*;
 
 import com.javaminiprojects.reservationmanager.model.Reservation;
 
+/*
+ * WIP
+ * 	- Changed DAYS, TABLES & SLOTS into String Arrays, adding more detail for the View Recipe function
+ * 	- View Reservations function is functional & formatted
+ *  - 
+ */
+
 public class ReservationManager {
 	private static boolean running = true;
 	private static String input;
 	
 	// Define data structure dimensions for calendar
-	final static int DAYS = 7;
-	final static int SLOTS = 5;
-	final static int TABLES = 3;
+	final static String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	final static String [] TABLES = {"A", "B", "C"};
+	final static String[] SLOTS = {"2-4", "4-6", "6-8", "8-10"};
 
 	public static void main(String[] args) {
 		// Define LinkedHashSet for waiting list and reservations
-		Set<Reservation> reservations = new LinkedHashSet<>();
 		Set<Reservation> waitlist = new LinkedHashSet<>();
 		
 		@SuppressWarnings("unchecked")
-		Map<Boolean, Reservation>[][][] calendar = new Map[DAYS][SLOTS][TABLES];
+		Map<Boolean, Reservation>[][][] calendar = new Map[DAYS.length][TABLES.length][SLOTS.length];
 
 		
 		// Define variables for validating user input
@@ -65,25 +71,45 @@ public class ReservationManager {
 	
 	public static void viewReservations(Map<Boolean, Reservation>[][][] calendar) {
 		System.out.println("Viewing Reservations");
-		if (reservations.isEmpty()) {
-			System.out.println("No reservations are scheduled at the moment.");
-			clearScreen();
-		} else {
-			for (int day = 0; day < DAYS; day++) {
-				System.out.println("Day " + (day + 1));
-			    for (int slot = 0; slot < SLOTS; slot++) {
-			        for (int table = 0; table < TABLES; table++) {
-			            System.out.println(calendar[day][slot][table]);  
+		//if (calendar.containsKey(true)) {
+		//	System.out.println("No reservations are scheduled at the moment.");
+		//	clearScreen();
+		//} else {
+			for (int day = 0; day < (DAYS.length); day++) {
+				System.out.println("================================= " + (DAYS[day].toUpperCase()) + " ==================================");
+			    for (int table = 0; table < (TABLES.length); table++) {
+			    	System.out.print("Table: " + (TABLES[table]));
+			    	
+			        for (int slot = 0; slot < (SLOTS.length); slot++) {
+			        	if (calendar[day][table][slot] == null) {
+			        		System.out.print("\t" + SLOTS[slot] + ": Empty"); 
+			        	}
+			        	else {
+			        		System.out.print("\t" + SLOTS[slot] + ": Booked");
+			        	}
+			        	 
 			        }
+			        System.out.println();
 			    }
+			    System.out.println();
 			}
-		}
+		//}
 		// Print method that creates a neatly formatted table
 		// It should represent the available time slots along with the customer details
 		// Reservations should be populated in their respective slot in the table 
-		clearScreen();
+		// clearScreen();
 		
 	}
+	
+	/*public static void hasReservations(Map<Boolean, Reservation>[][][] calendar) {
+		boolean hasReservations = false;
+		for (int day = 0; day < DAYS; day++) {
+			System.out.println("Day: " + (day + 1));
+		    for (int slot = 0; slot < SLOTS; slot++) {
+		    	System.out.println("Slot: " + (slot + 1));
+		        for (int table = 0; table < TABLES; table++) {
+		        	if (calendar[day][slot][table]) 
+	}*/
 	
 	public static void bookReservation() {
 		System.out.println("Booking Reservations");
