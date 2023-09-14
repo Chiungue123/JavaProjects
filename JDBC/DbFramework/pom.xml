@@ -5,4 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Java Database Gateway Framework</name>
   <description>Java Database Gateway Framework is a foundational architecture designed to simplify Java-to-MySQL database interactions. Built with industry standards and best practices, this framework encapsulates the JDBC boilerplate code, offering a streamlined and efficient way to handle database operations. Leveraging a well-organized package structure and predefined interfaces, it minimizes the complexity in the main application logic, making it easier to build, maintain, and scale your projects. This project is an essential stepping stone for anyone aspiring to specialize in full-stack development, particularly with a focus on backend technologies.</description>
+
+<dependencies>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.33</version>
+	</dependency>
+</dependencies>
+
 </project>
