@@ -6,10 +6,10 @@ public class Reservation {
 	private int guests;
 	private String day;
 	private String reservationTime;
-	private String table;
+	private int table;
 	
 
-	public Reservation(Customer mainCustomer, int guests, String day, String reservationTime, String table) {
+	public Reservation(Customer mainCustomer, int guests, String day, String reservationTime, int table) {
 	    this.mainCustomer = mainCustomer;
 	    this.guests = guests;
 	    this.day = day;
@@ -18,9 +18,9 @@ public class Reservation {
 	}
 	
 	// Getters
-	public Reservation getReservation(LinkedHashSet<Reservation> reservations, String table) {
+	public Reservation getReservation(LinkedHashSet<Reservation> reservations, int table) {
 		for (Reservation r : reservations) {
-			if (r.table.equals(table)) {
+			if (r.table == table) {
 				Reservation reservation = r;
 				return reservation;
 			}
@@ -37,7 +37,7 @@ public class Reservation {
 		return reservation.reservationTime;
 	}
 	
-	public String getReservationTableNumber(Reservation reservation) {
+	public int getReservationTableNumber(Reservation reservation) {
 		return reservation.table;
 	}
 	
