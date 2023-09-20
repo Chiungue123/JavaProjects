@@ -1,9 +1,8 @@
 package com.javaminiprojects.jdbc.dbframework.controller;
 
-import java.sql.Connection;
+import java.util.Scanner;
 
 import com.javaminiprojects.jdbc.dbframework.db.Database;
-import com.javaminiprojects.jdbc.dbframework.model.Customer;
 
 public class DatabaseFramework {
 
@@ -14,14 +13,14 @@ public class DatabaseFramework {
 		String pass = "pingpong35";
 		
 		Database db = new Database();
-		Connection con = null;
+		Scanner sc = new Scanner(System.in);
 		
 		//Customer customer = new Customer();
-		db.createConnection(con, url, user, pass);
-		db.closeConnection(con);
+		db.createConnection(url, user, pass);
+		db.createCustomer(sc);
+		db.closeConnection();
 		
 	}
-
 }
 /*
 
@@ -31,7 +30,19 @@ public class DatabaseFramework {
 	- Created SQL table called 'customers' 
 	- Customer object attributes, getter and setter methods created
 - Next Steps
-	- Ready to write functionality to insert a customer object to the db
+	- Ready to build logic to insert a customer object to the database
 	- Finish closeConnection() function
 
+- Work in Progress
+	- For jdbc.dbframework.db package:
+		Connection object is globalized within the scope of database.java
+		No longer need to pass connection as an argument in createConnection or closeConnection methods
+		Connection object is defined in the try block, automatically closing the connection, result is less boilerplate code
+	- For jdbc.dbframework.model package:	
+		- Encountered type mismatch when setting customer's birthday. 
+		- The issue arises from importing java.sql.Date in the Customer class while SimpleDateFormat.parse() returns java.util.Date. 
+		- Aligned the Customer class to use java.util.Date to resolve the type incompatibility.
+	- Next steps
+		- Null pointer excepitn
+		
 */

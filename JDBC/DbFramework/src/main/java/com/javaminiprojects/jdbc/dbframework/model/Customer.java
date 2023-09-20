@@ -1,6 +1,6 @@
 package com.javaminiprojects.jdbc.dbframework.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Customer {
 	private Integer cid;
