@@ -43,6 +43,7 @@ public class DatabaseFramework {
 				db.viewCustomers();
 				break;
 			case (3):
+				db.viewCustomers();
 				db.updateCustomer(sc);
 				break;
 			case (4):
@@ -85,5 +86,17 @@ public class DatabaseFramework {
 	
 	- Customer is created and is sucessfully added to the db
 	- Created a perpetual menu for CRUD operations
+	Next steps
+		- Implement remanining CRUD operations
+
+- Work in Progress: Progress in CRUD methods 
+	- Select operation works
+	- Update operation underway
+		- Populates the console with existing users to act as a reference
+	- Implemented the following methods
+		- getCustomerIDs() returns a list of customer IDs validate the user's input for updating a customer
+		- getCustomerByID() returns the customer with the selected id, populating the console with the customer's information just before prompting the updated details
+		- Error: getCustomerByID(input) displays Customer values are null despite initialization
+		- Next Step: Investigate logic for Customer constructor and associated methods.
 */
 	

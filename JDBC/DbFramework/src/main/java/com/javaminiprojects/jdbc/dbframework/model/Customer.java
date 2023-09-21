@@ -9,7 +9,15 @@ public class Customer {
 	private Date birthday;
 	private Integer age;
 	
-	public Customer() {};
+	public Customer() {}
+	
+	public Customer(Customer customer) {
+		customer.cid = cid;
+		customer.name = name;
+		customer.email = email;
+		customer.birthday = birthday;
+		customer.age = age;
+	}
 	
 	public Customer (Integer cid, String name, String email, Date birthday, Integer age ) {
 		this.cid = cid;
@@ -49,4 +57,14 @@ public class Customer {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+	
+	@Override
+	public String toString() {
+	    // This method overrides the default toString method to provide a human-readable
+	    // representation of the Customer object. This is useful for debugging and logging.
+	    return String.format(
+	            "[ID = %3s | Name = %-12s | Email = %-23s | Birthday = %-10s | Age = %3s ]", 
+	            cid, name, email, birthday, age);
+	}
+	
 }

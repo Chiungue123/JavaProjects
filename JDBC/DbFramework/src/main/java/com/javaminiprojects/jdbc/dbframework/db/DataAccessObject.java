@@ -13,7 +13,8 @@ public interface DataAccessObject {
 	// Customer Methods
 	public void createCustomer(Scanner scanner);
 	public void viewCustomers();
-	public void getCustomer(Scanner scanner);
 	public void updateCustomer(Scanner scanner);
+	public ArrayList<Integer> getCustomerIDs();
+	public Customer getCustomerById(int id);
 	public void deleteCustomer(Scanner scanner);
 }
