@@ -12,8 +12,8 @@ public interface DataAccessObject {
 	
 	// Customer Methods
 	public void createCustomer(Scanner scanner);
-	public void getCustomers(ArrayList<Customer> customer[]);
-	public void getCustomer(int id);
-	public void updateCustomer(Customer customer);
-	public void deleteCustomer(Customer customer);
+	public void viewCustomers();
+	public void getCustomer(Scanner scanner);
+	public void updateCustomer(Scanner scanner);
+	public void deleteCustomer(Scanner scanner);
 }

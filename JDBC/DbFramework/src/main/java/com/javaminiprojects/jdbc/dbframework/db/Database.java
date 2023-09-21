@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,13 +16,16 @@ import java.util.Scanner;
 public class Database implements DataAccessObject {
 	// Declare Connection 
 	private Connection con;
+	private Statement st;
 	
 	// Constructor
 	public Database () {}
 	
 	public void createConnection (String url, String user, String pass) {
-		try(Connection con = DriverManager.getConnection(url, user, pass)) {
-			System.out.println("Connected to Database");
+		try {
+			// Use 'this.con' to make the connection object a class-level variable, allowing it to be reused across multiple methods in the class.
+			this.con = DriverManager.getConnection(url, user, pass); // Create connection
+			this.st = con.createStatement(); // Create statement
 		}
 		catch (SQLException ex) {
 			System.out.println("Error connecting to database: " + ex.getMessage());
@@ -34,7 +38,6 @@ public class Database implements DataAccessObject {
 		try {
 			if (con != null) {
 				con.close();
-				System.out.println("Connection is closed");
 			}
 			//System.out.println("Connection is null, skipping closeConnection()");
 		}
@@ -58,15 +61,15 @@ public class Database implements DataAccessObject {
 			System.out.println("Enter Customer Email: ");
 			customer.setEmail(sc.nextLine());
 			System.out.println("Enter Customer Birthday (yyyy-MM-dd): ");
+			// The formatter.parse method transforms the String date input into java.util.Date type compatible with SQL storage
 			customer.setBirthday(formatter.parse(sc.nextLine()));
 			System.out.println("Enter Customer Age: ");
 			customer.setAge(sc.nextInt());
 			
-			// Create statement and SQL query 
-			Statement st = con.createStatement();
+			// Create SQL query  
 			String sql = "INSERT INTO CUSTOMERS (NAME, EMAIL, BIRTHDAY, AGE) VALUES";
-			sql = sql + "('" + customer.getName() + "','" + customer.getEmail() + "','" + customer.getBirthday() + "','" + customer.getAge() + ")";
-			System.out.println(sql);
+			sql = sql + "('" + customer.getName() + "','" + customer.getEmail() + "','" + new java.sql.Date(customer.getBirthday().getTime()) + "','" + customer.getAge() + "')";
+			System.out.println("Query: " + sql);
 			
 			// Execute statement
 			int rows = st.executeUpdate(sql);
@@ -75,27 +78,37 @@ public class Database implements DataAccessObject {
 			
 		} catch (ParseException | SQLException ex) {
 			System.out.println("Error while creating customer: " + ex.getMessage());
-			System.out.println("Stack Trace: " + ex.getStackTrace());
 		}
 	}
 
 	@Override
-	public void getCustomers(ArrayList<Customer>[] customer) {
-		// TODO Auto-generated method stub
+	public void viewCustomers() {
+		String sql = "SELECT * FROM CUSTOMERS";
+		try (ResultSet rs = st.executeQuery(sql)){
+			while (rs.next()) {
+				/*System.out.print("ID: "+rs.getInt("ID"));
+			    System.out.print("Name: "+rs.getString("First_Name"));
+			    System.out.print("Age: "+rs.getString("Last_Name"));
+			    System.out.print("Salary: "+rs.getDate("Date_Of_Birth"));*/
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
-	public void getCustomer(int id) {
+	public void getCustomer(Scanner scanner) {
 		// TODO Auto-generated method stub	
 	}
 
 	@Override
-	public void updateCustomer(Customer customer) {
+	public void updateCustomer(Scanner scanner) {
 		// TODO Auto-generated method stub	
 	}
 
 	@Override
-	public void deleteCustomer(Customer customer) {
+	public void deleteCustomer(Scanner scanner) {
 		// TODO Auto-generated method stub	
 	}
 }
