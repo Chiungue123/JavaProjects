@@ -159,41 +159,40 @@ public class Database implements DataAccessObject {
 
 	@Override
 	public void updateCustomer(Scanner scanner) {
-		String sql = "UPDATE CUSTOMERS SET NAME = ?, EMAIL = ?, BIRTHDAY = ?, AGE = ? WHERE ID_USER = ?"; // Predefining the sql query
+		
+		String sql = "UPDATE CUSTOMERS SET NAME = ?, EMAIL = ?, BIRTHDAY = ?, AGE = ? WHERE CID = ?"; // Predefining the sql query
 		boolean valid = false; // Controls the user prompts in the do-while loop
 		int input; // For capturing the id
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Formats the date value in the sql statement
 		List<Integer> customerIDs = new ArrayList<>(getCustomerIDs()); // Returns a list of customer IDs validate the user's input.
 		System.out.println();
 		
 		do {
-			// Prompt the user for the proper input
-			System.out.println("Enter user Id: ");
-			input = scanner.nextInt();
-			scanner.nextLine();
-			
-			// Validate user input
-			// Invalid input will be provided with a personalized message depending on the nature of the input to guide the user
-			if (input == (int)input || customerIDs.contains(input)) {
-				valid = true;
-			} else if (!(input == (int)input)){
-				System.out.println("Please enter an integer (eg. 1, 2, 3)");
-			} else if (!customerIDs.contains(input)) {
-				System.out.println("The id " + input + "doesn't exist");
-			} else {
-				System.out.println("Invalid Entry");
-			}
-		} while(!valid);
+			  System.out.println("Enter user Id: ");
+			  input = scanner.nextInt();
+			  scanner.nextLine();
+
+			  if (customerIDs.contains(input)) {
+			    System.out.println("User id input validated");
+			    valid = true;
+			  } else {
+			    System.out.println("The id " + input + " doesn't exist");
+			  }
+			} while(!valid);
+
 		
 		// Set the placeholder values in prepared statement
 		try (PreparedStatement prSt = con.prepareStatement(sql)) {
+			
 			/*
 			 * Prompt the user for the updated customer values
 			 */
 			
 			System.out.println();
 	
-			Customer customer = new Customer(getCustomerById(input)); // Get selected customer by id
+			Customer customer = new Customer(); // Create an empty customer object
+			customer = getCustomerById(input); // Get selected customer by id
 			System.out.println("Customer: " + customer); // Show existing values for customer, providing a reference for the user to work with
 			System.out.println("Enter Customer Name: ");
 			customer.setName(scanner.nextLine());
@@ -211,9 +210,13 @@ public class Database implements DataAccessObject {
 			
 			prSt.setString(1, customer.getName());
 			prSt.setString(2, customer.getEmail());
-			prSt.setDate(3, (java.sql.Date) new Date(customer.getBirthday().getTime()));
+			prSt.setDate(3, new java.sql.Date(customer.getBirthday().getTime()));
 			prSt.setInt(4, customer.getAge());
 			prSt.setInt(5, customer.getCid());
+			
+			/*
+			 * Execute the prSt query
+			 */
 			
 			int rows = prSt.executeUpdate();
 
@@ -227,17 +230,16 @@ public class Database implements DataAccessObject {
 		} catch (SQLException ex) {
 			System.out.println("Error while getting customerIDs");
 			System.out.println("Error Message: " + ex.getMessage());
-			System.out.println("SQL State: " + ex.getSQLState());
+			System.out.println("SQL: " + ex);
 		} catch (ParseException ex) {
 			System.out.println("Error while getting customerIDs");
 			System.out.println("Error Message: " + ex.getMessage());
 			System.out.println("SQL State: " + ex.getStackTrace());
 		}
-	
 	}
 
 	@Override
 	public void deleteCustomer(Scanner scanner) {
-		// TODO Auto-generated method stub	
+		
 	}
 }

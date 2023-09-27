@@ -47,6 +47,7 @@ public class DatabaseFramework {
 				db.updateCustomer(sc);
 				break;
 			case (4):
+				db.viewCustomers();
 				db.deleteCustomer(sc);
 				break;
 			case (5):
@@ -94,9 +95,9 @@ public class DatabaseFramework {
 	- Update operation underway
 		- Populates the console with existing users to act as a reference
 	- Implemented the following methods
-		- getCustomerIDs() returns a list of customer IDs validate the user's input for updating a customer
+		- getCustomerIDs() returns a list of customer IDs to validate the user's input for updating a customer
 		- getCustomerByID() returns the customer with the selected id, populating the console with the customer's information just before prompting the updated details
-		- Error: getCustomerByID(input) displays Customer values are null despite initialization
+		- Error: getCustomerByID(input) prints Customer values but are null despite initialization
 		- Next Step: Investigate logic for Customer constructor and associated methods.
 */
 	
