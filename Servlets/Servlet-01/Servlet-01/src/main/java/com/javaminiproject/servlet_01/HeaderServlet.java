@@ -2,6 +2,7 @@ package com.javaminiproject.servlet_01;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,18 +18,28 @@ public class HeaderServlet extends HttpServlet {
 		
 		response.setContentType("text/HTML");
 		PrintWriter out = response.getWriter();
+		String host = request.getHeader("host");
+		
 		out.print("<html>");
 		out.print("<body>");
-		out.print("<h1>Kind. Generous. Supportive. You.<h1>");
-		out.print("<a href='https://www.google.ca/?gws_rd=ssl'>Google</a>");
-		out.print("<body>");
+		out.print("<h1>Header Info Servlet</h1>");
+		out.print("<p>Host: " + host + "</p>");
+		out.print("</body>");
 		out.print("</html>");
-		// NOTE: This manual process of writing HMTL is taken care of by JSP. This is an example of solely displaying data through the servlet
-
+		
+		Iterator<String> ite = request.getHeaderNames().asIterator();
+		while(ite.hasNext()){
+			out.print(ite.next() + ":	" + request.getHeader(ite.next()) + "</h3>");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }
+/*
+- Cloned HelloServlet to create HeaderServlet in servlet_01 package
+	- Implemented Iterator to get Header Names from HeaderServlet
+	- Header names and corresponding values displayed on HeaderServlet html output
+	- Implemented request.getHeader('host'); and out.print("<p>Host: " + host + "</p>"); to print host header
+*/

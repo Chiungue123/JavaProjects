@@ -14,8 +14,7 @@ public class ParameterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		response.setContentType("text/HTML");
 		PrintWriter out = response.getWriter();
 		String firstname = request.getParameter("firstname");
@@ -28,7 +27,6 @@ public class ParameterServlet extends HttpServlet {
 		out.print("<p>Last Name: " + lastname + "</p>");
 		out.print("</body>");
 		out.print("</html>");
-		// NOTE: This manual process of writing HMTL is taken care of by JSP. This is an example of solely displaying data through the servlet
 
 	}
 
@@ -37,8 +35,3 @@ public class ParameterServlet extends HttpServlet {
 		doGet(request, response);
 	}
 }
-
-// Work in Progress: Working more with doGet and doPost
-//		Created Parameter Servlet
-//		- Copy & Pasted HelloServlet to servlet_01 package to 
-//		- 
