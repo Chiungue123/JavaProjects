@@ -136,16 +136,21 @@ public class Database implements DataAccessObject {
 	@Override
 	public ArrayList<Integer> getCustomerIDs() {
 		ArrayList <Integer> IDs = new ArrayList<>();
-		String sql = "SELECT * FROM CUSTOMERS";
-		try (ResultSet rs = st.executeQuery(sql)){
-			if (rs.next()) {
-				while(rs.next()) {
-					Integer id = new Integer(rs.getInt("CID"));
-					IDs.add(id);
-				}
-			} else {
-				System.out.println("No customer IDs found");
-				return null;
+		String sql = "SELECT CID FROM CUSTOMERS";
+		// Create a statement object that is bidirectional to check if the result set is empty to inform the user
+		try (Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		     ResultSet rs = st.executeQuery(sql)) {
+			// Move the cursor from the initial position to the first row
+			if (!rs.next()) {
+			    System.out.println("No Customer IDs found");
+			    return null;
+			}
+			rs.beforeFirst(); // Move the cursor back to the initial position
+			System.out.println("Customer IDs");
+			while(rs.next()) {
+				Integer id = new Integer(rs.getInt("CID"));
+				System.out.print(id + ", ");
+				IDs.add(id);
 			}
 			
 		} catch (SQLException ex) {
@@ -161,7 +166,6 @@ public class Database implements DataAccessObject {
 	public void updateCustomer(Scanner scanner) {
 		
 		String sql = "UPDATE CUSTOMERS SET NAME = ?, EMAIL = ?, BIRTHDAY = ?, AGE = ? WHERE CID = ?"; // Predefining the sql query
-		boolean valid = false; // Controls the user prompts in the do-while loop
 		int input; // For capturing the id
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Formats the date value in the sql statement
@@ -175,11 +179,11 @@ public class Database implements DataAccessObject {
 
 			  if (customerIDs.contains(input)) {
 			    System.out.println("User id input validated");
-			    valid = true;
+			    break;
 			  } else {
 			    System.out.println("The id " + input + " doesn't exist");
 			  }
-			} while(!valid);
+			} while(true);
 
 		
 		// Set the placeholder values in prepared statement
@@ -241,5 +245,72 @@ public class Database implements DataAccessObject {
 	@Override
 	public void deleteCustomer(Scanner scanner) {
 		
+		// Retrieve Customer IDs 
+		List<Integer> customerIDs = new ArrayList<>(getCustomerIDs());
+		System.out.println();
+		System.out.println("Customer IDs");
+		customerIDs.forEach(c -> System.out.print(c + ", "));
+		System.out.println();
+		
+        boolean valid = false; // Validates user's prompt
+		int input; // Captures the desired CID to be deleted
+		
+		do {
+			  System.out.println("Enter user Id: ");
+			  input = scanner.nextInt();
+			  scanner.nextLine();
+
+			  if (customerIDs.contains(input)) {
+			    valid = true;
+			  } else {
+			    System.out.println("The id " + input + " doesn't exist");
+			  }
+			} while(!valid);
+		
+		Customer customer = new Customer(getCustomerById(input)); // Get selected customer by id
+		System.out.println();
+		System.out.println("Customer: " + customer);
+		System.out.println();
+		
+		do {
+			String sql = "DELETE FROM CUSTOMERS WHERE CID = ?";
+			System.out.println("Confirm to delete Customer ID: " + customer.getCid() + " (Y/N)");
+			String response = scanner.nextLine();
+			if (response.toUpperCase().equals("Y")) {
+				try (PreparedStatement prSt = con.prepareStatement(sql)) {
+					
+					// Display the chosen ID and the Query statement to be executed
+					System.out.println();
+					System.out.println("Id: " + input);
+					prSt.setInt(1, input);
+					String query = ("DELETE FROM CUSTOMERS WHERE CID = " + input);
+					System.out.println("Executing Query: " + query); 
+
+						// Execute update, return the number of affected rows
+			            int rows = prSt.executeUpdate();
+
+			            if (rows > 0) {
+			                System.out.println("Number of rows affected: " + rows);
+			                System.out.println();
+			            }
+			            else {
+			                System.out.println("User not found, user ID: " + input);
+			                System.out.println();
+			            }
+			            break;
+			            
+				} catch (SQLException ex) {
+
+		            System.err.println("Error while connecting!");
+		            System.err.println("SQL: " + ex);
+		            System.err.println("SQL State: " + ex.getSQLState());
+		            System.err.println("Error Message: " + ex.getMessage());
+					
+		        }
+			} else {
+				System.out.println("Breaking out of deletion confirmation");
+				break;
+			}
+		} while (true);
 	}
 }

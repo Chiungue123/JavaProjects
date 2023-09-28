@@ -12,11 +12,11 @@ public class Customer {
 	public Customer() {}
 	
 	public Customer(Customer customer) {
-		customer.cid = cid;
-		customer.name = name;
-		customer.email = email;
-		customer.birthday = birthday;
-		customer.age = age;
+		this.cid = customer.cid;
+		this.name = customer.name;
+		this.email = customer.email;
+		this.birthday = customer.birthday;
+		this.age = customer.age;
 	}
 	
 	public Customer (Integer cid, String name, String email, Date birthday, Integer age ) {
