@@ -9,7 +9,7 @@ public class Reservation {
 	private int table;
 	
 
-	public Reservation(Customer mainCustomer, int guests, String day, String reservationTime, int table) {
+	public Reservation (Customer mainCustomer, int guests, String day, String reservationTime, int table) {
 	    this.mainCustomer = mainCustomer;
 	    this.guests = guests;
 	    this.day = day;

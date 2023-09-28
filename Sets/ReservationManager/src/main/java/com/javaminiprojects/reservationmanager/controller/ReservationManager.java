@@ -20,6 +20,12 @@ import com.javaminiprojects.reservationmanager.model.Reservation;
  * 		- The conditional logic should render 'Booked' when reserved and 'Open' if no reserations exist for that slot
  * 		- To trouble shoot, print out the reservation object as well as the coordinates where the key/value pair should be
  * 		- This will determine wether the values are not being sent or if the conditional logic isn't correct, should be one or the other
+ * 		- Maybe the connection is null, perhaps printing out the value of the connection to see if it's still null will help 
+ * 		- String isConnectionNull = connection=null ? "Connection is null" : "Connection is secure";
+ * 
+ * Work in Progress
+ *  - Problem: Reservation doesn't reflect on calendar after being booked
+ *  
  */
 
 public class ReservationManager {
@@ -84,38 +90,25 @@ public class ReservationManager {
 	public static void viewCalendar(Map<Boolean, Reservation>[][][] calendar) { 
 		String header = "|  Slots  |  Table 1  |  Table 2  |  Table 3  |";
 		System.out.println("Viewing Reservations");
-		/*for (int day = 0; day < (DAYS.length); day++) {
+		for (int day = 0; day < (DAYS.length); day++) {
 			System.out.println("==================== " + (DAYS[day].toUpperCase()) + " ==================");
 			System.out.println(header);
 			System.out.println("-----------------------------------------------");
 		    for (int slot = 0; slot < (SLOTS.length); slot++) {
-		    	//System.out.print("| ");
 		    	System.out.printf("%-2s %-5s %2s", "|", SLOTS[slot], "|");
 		        for (int table = 0; table < TABLES.length; table++) {
-		        	if (calendar[day][slot][table] == null || calendar[day][slot][table].containsKey(isAvailable)) {
+		        	if (calendar[day][slot][table] == null || calendar[day][slot][table].containsKey(!isAvailable)) {
 		        		System.out.printf("%7s %4s", "Open", "|");
 		        	}
 		        	else {
-		        		System.out.printf("%6 %3", "Booked", "|");
+		        		System.out.printf("%8s %3s", "Booked", "|");
 		        	}
 		        }
 		        System.out.println();
 		    }
 		    System.out.println("-----------------------------------------------");
-		    System.out.println();*/
-			System.out.println("==================== SUNDAY ==================");
-			for (int table = 0; table < TABLES.length; table++) {
-	        	if (calendar[0][0][table] == null || calendar[0][0][table].containsKey(isAvailable)) {
-	        		System.out.printf("Table " + (table+1) + ", " + DAYS[0] + ", " + SLOTS[0] + "Status: Open");
-	        	}
-	        	else {
-	        		System.out.printf("Table " + (table+1) + " is booked");
-	        	}
-	        	
-        	System.out.println();
+		    System.out.println();
 		}
-		
-			
 		// Print method that creates a neatly formatted table
 		// It should represent the available time slots along with the customer details
 		// Reservations should be populated in their respective slot in the table 
@@ -153,7 +146,7 @@ public class ReservationManager {
 		int day = scanner.nextInt();
 		scanner.nextLine();
 		System.out.println();
-		System.out.print("== Time Slots ==\nEnter 1 -> 2-4 \nEnter 2 -> 4-6 \nEnter 3 -> 6-8 \nEnter 4 -> 8-10 \n> ");
+		System.out.print("== Time Slots ==\nEnter 1 -> 2-4pm \nEnter 2 -> 4-6pm \nEnter 3 -> 6-8pm \nEnter 4 -> 8-10pm \n> ");
 		
 		int slot = scanner.nextInt();
 		scanner.nextLine();
@@ -167,13 +160,13 @@ public class ReservationManager {
 		}
 		System.out.println("> ");
 		int table = scanner.nextInt();
+		scanner.nextLine();
 		
 		// Second, prompt the user for the Main Customer details and number of guests 
 		System.out.println();
 		System.out.println("========== Customers Details ==========");
 		System.out.println("Main Customer Details\nName: ");
-		String name = scanner.next();
-		scanner.nextLine();
+		String name = scanner.nextLine();
 		System.out.println("Age: ");
 		int age = scanner.nextInt();
 		scanner.nextLine();
@@ -195,16 +188,30 @@ public class ReservationManager {
 		String confirm = scanner.nextLine();
 		
 		// Create and print the Customer and Reservation object
-		if (confirm.equals("Y")) {
-			Customer mainCustomer = new Customer(name, age);
-			Reservation reservation = new Reservation(mainCustomer, guests, DAYS[day-1], SLOTS[slot-1], table);
+		if (confirm.toUpperCase().equals("Y")) {
 			
 			// Initializing selected coordinates on calendar
-	        calendar[day - 1][slot-1][table-1] = new HashMap<>();
-	        calendar[day - 1][slot-1][table-1].put(isAvailable, reservation);
-			System.out.println("Reservation Confirmed");
+			System.out.println();
+			System.out.println("Before Confirming Reservation");
+			System.out.println("calendar[" + (day - 1) + "][" + (slot - 1) + "][" + (table-1) + "] = " + calendar[day - 1][slot-1][table-1]);	
 			System.out.println();
 			
+			Customer mainCustomer = new Customer(name, age);
+			Reservation reservation = new Reservation(mainCustomer, guests, DAYS[day-1], SLOTS[slot-1], table);
+			calendar[day - 1][slot-1][table-1] = new HashMap<>();
+			calendar[day-1][slot-1][table-1].put(true, reservation);
+			
+			System.out.println();
+			System.out.println("After Confirming Reservation");
+			System.out.println("Reservation: " + reservation.toString());
+			System.out.println("Calendar[" + (day - 1) + "][" + (slot - 1) + "][" + (table-1) + "] = " + calendar[day - 1][slot-1][table-1]);	
+			System.out.println();
+			
+			System.out.println("Reservation Confirmed");
+			/* ======================= ERROR ON LINE BELOW ======================= 
+			 * System.out.println("calendar[0][0][0] = " + "Key: " + calendar[0][0][0].containsKey(true) + ", Value: " + calendar[0][0][0].getValue());	
+			 */
+			System.out.println();
 		}
 	}
 	
