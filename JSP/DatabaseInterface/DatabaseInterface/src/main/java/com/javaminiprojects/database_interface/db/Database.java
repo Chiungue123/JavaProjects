@@ -1,12 +1,11 @@
 package com.javaminiprojects.database_interface.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.*;
+import java.util.*;
 import java.util.Date;
+import java.text.*;
+import com.javaminiprojects.database_interface.model.Customer;
+
 
 //For simplicity sake: Connection and Prepared Statements are now method level varibles rather than class level
 
@@ -17,9 +16,6 @@ import java.util.Date;
 // Action: Discovered that the birthday input tag had incorrect name,  changed txtName to txtBirth
 
 // Completed createCustomer method
-
-
-import com.javaminiprojects.database_interface.model.Customer;
 
 public class Database {
 	
@@ -79,5 +75,51 @@ public class Database {
 			System.out.println("Null Pointer Exception while creating Customer");
 			System.out.println("Error: " + ex);
 		}
-	}	
+	}
+	
+	public List<Customer> getCustomers() {
+		
+		String sql = "SELECT * FROM CUSTOMERS";
+		List<Customer> customers = new ArrayList<>();
+		
+		try(Connection con = DriverManager.getConnection(url, user, pass);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);) {
+			
+			while (rs.next()) {
+				
+				Integer cid = rs.getInt("cid");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Date birthday = rs.getDate("birthday");
+				Integer age = rs.getInt("age");
+				
+				Customer customer = new Customer(cid, name, email, birthday, age);
+				
+				customers.add(customer);
+			}
+			
+		}
+		catch(SQLException ex) {
+			System.out.println("Error getting customers");
+			System.out.println("Error: " + ex);
+			System.out.println("Stack Trace: " + ex.getStackTrace());
+		}
+		
+		return customers;
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

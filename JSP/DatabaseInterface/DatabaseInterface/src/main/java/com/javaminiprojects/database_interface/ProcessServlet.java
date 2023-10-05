@@ -1,6 +1,9 @@
 package com.javaminiprojects.database_interface;
 
+import com.javaminiprojects.database_interface.model.Customer;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +18,25 @@ public class ProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String attribute;
+		String action = request.getParameter("action");
+		
+		if ("Show".equals(action)) {
+			
+			System.out.println("Action: " + action);
+		    // Create Database Connection
+			Database db = new Database();
+			List<Customer> customers = new ArrayList<>(db.getCustomers());
+			attribute = "show";
+			
+			// Set attribute as show, send customers to jsp
+			request.setAttribute("action", attribute);
+			request.setAttribute("customers", customers);
+			
+			// Forward to JSP
+			request.getRequestDispatcher("result.jsp").forward(request, response);
+			
+		}
 	}
 
 
@@ -43,21 +64,9 @@ public class ProcessServlet extends HttpServlet {
 			// Forward to JSP
 			request.getRequestDispatcher("result.jsp").forward(request, response);
 			
-		} else if ("Show".equals(action)) {
-			
-		    // Create Database Connection
-			Database db = new Database();
-			//db.showCustomers();
-			
-			// Set attribute as show
-			attribute = "show";
-			request.setAttribute("action", attribute);
-			
-			// Forward to JSP
-			request.getRequestDispatcher("result.jsp").forward(request, response);
-			
 		} else if ("Update".equals(action)) {
-			System.out.println("Processing Action: Update");
+			
+			System.out.println("Action: " + action);
 			  
 			// Create Database Connection
 			Database db = new Database();
@@ -71,10 +80,16 @@ public class ProcessServlet extends HttpServlet {
 			request.getRequestDispatcher("result.jsp").forward(request, response);
 			
 		} else if ("Delete".equals(action)) {
-			System.out.println("Processing Action: Delete");
+			
+			System.out.println("Action: " + action);
 		    // Perform delete operation
 			
-		}	
+		} else {
+			System.out.println("Action: " + action);
+			request.setAttribute("action", action);
+			request.getRequestDispatcher("result.jsp").forward(request, response);
+			
+		}
 	}
 
 }
