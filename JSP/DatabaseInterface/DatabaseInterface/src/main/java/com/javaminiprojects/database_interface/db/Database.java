@@ -109,17 +109,21 @@ public class Database {
 		return customers;
 		
 	}
+	
+	public void deleteCustomerById(Integer id) {
+		String sql = "DELETE FROM USER WHERE ID_USER = ?";
+		
+		try(Connection con = DriverManager.getConnection(url, user, pass);
+			PreparedStatement prst = con.prepareStatement(sql)) {
+			
+			prst.setInt(1, id);
+			int rows = prst.executeUpdate();
+			System.out.println("Number of rows affected: " + rows);
+			
+		}
+		catch (SQLException ex) {
+			System.out.println("Error Deleting Customer with ID: " + id);
+			System.out.println("Error: " + ex);			
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

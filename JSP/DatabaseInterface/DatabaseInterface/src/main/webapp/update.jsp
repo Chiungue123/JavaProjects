@@ -6,7 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
-</body>
+  <body>
+	<h2>Enter Customer ID Below</h2>
+	<form action="ProcessServlet" method="POST">
+	  <p>Customer ID: </p><input type="text" name="txtCid" required>
+	  <br><br>
+	  <input type="submit" name="action" value="Update">
+	</form>
+  </body>
 </html>

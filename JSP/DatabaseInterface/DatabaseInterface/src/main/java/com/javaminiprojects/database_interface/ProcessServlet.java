@@ -64,6 +64,15 @@ public class ProcessServlet extends HttpServlet {
 			// Forward to JSP
 			request.getRequestDispatcher("result.jsp").forward(request, response);
 			
+		} else if ("Select".equals(action)) {
+			// 
+			// For delete operations and possibly updating and creation
+			// Select ID form is submitted here
+			// Goal is to prompt the user "are you sure you want to proceed"
+			// Only after confirming will the operation take place
+			// Additional functionality
+			//
+		
 		} else if ("Update".equals(action)) {
 			
 			System.out.println("Action: " + action);
@@ -81,8 +90,17 @@ public class ProcessServlet extends HttpServlet {
 			
 		} else if ("Delete".equals(action)) {
 			
-			System.out.println("Action: " + action);
-		    // Perform delete operation
+			// Get customer id
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			Database db = new Database();
+			db.deleteCustomerById(id);
+			
+			// Set attribute to delete
+			attribute = "delete";
+			request.setAttribute("action", attribute);
+			
+			// Forward to JSP
+			request.getRequestDispatcher("result.jsp").forward(request, response);
 			
 		} else {
 			System.out.println("Action: " + action);
@@ -91,5 +109,4 @@ public class ProcessServlet extends HttpServlet {
 			
 		}
 	}
-
 }

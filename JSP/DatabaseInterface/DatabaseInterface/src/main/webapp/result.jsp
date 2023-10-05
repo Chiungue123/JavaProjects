@@ -10,7 +10,7 @@
 </head>
   <body>
 	<% 	 
-		String action = (String) request.getAttribute("action");
+		String action = (String)request.getAttribute("action");
 		if ("create".equals(action)) { 
 	%>
 		<h2>Customer Successfully Created</h2>
@@ -49,6 +49,13 @@
 		    %>
 		</table>
 	<%
+		}
+		else if ("delete".equals(action)){
+	%>	
+		<h2>Customer Successfully Deleted</h2>
+		<br>
+		<a href="index.jsp">Try Again</a>
+	<%	
 		}
 		else {
 	%>

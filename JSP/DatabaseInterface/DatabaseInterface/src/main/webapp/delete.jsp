@@ -11,7 +11,7 @@
 	<form action="ProcessServlet" method="POST">
 		Enter Customer ID: <input type="text" name="id" required>
 		<br>
-		<input type="submit">
+		<input type="submit" name="action" value="Delete">
 	</form>
   </body>
 </html>
