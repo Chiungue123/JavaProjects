@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="aRef" class="com.javaprojects.dependencyinjectiondemo.bean.Address">  
+		<!-- collaborators and configuration for this bean go here -->
+		<property name="street" value="StreetABC"/>
+		<property name="city" value="Gotham"/>
+		<property name="province" value="Ontario"/>
+		<property name="postalCode" value="v1h0g5"/>
+	</bean>
+
+	<bean id="rRef" class="com.javaprojects.dependencyinjectiondemo.bean.Restaurant">
+		<!-- collaborators and configuration for this bean go here -->
+		<property name="name" value="Popeyes"/>
+		<property name="phone" value="7784782175"/>
+		<property name="operatingHours" value="10:00 - 22:00"/>
+		<property name="ratings" value="4.5"/>
+		
+		<!-- IoC Container will use Setter Method for Adding Dependancy -->
+		<!-- SETTER INJECTION -->
+		<!-- <property name="address" ref="aRef"/> -->
+		
+		<!-- CONSTRUCTOR INJECTION -->
+		<constructor-arg ref="aRef"/>
+		<property name="searchKeywords">
+			<list>
+				<value> Pizza </value>
+				<value> Sandwich </value>
+				<value> Salad </value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- more bean definitions go here -->
+
+</beans>
