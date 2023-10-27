@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The web-app tag defines the root element of a deployment descriptor for a Java EE web application. -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         id="WebApp_ID"
+         version="4.0">
+  
+  <!-- display-name sets the name that will be displayed in Java EE server admin console. -->
+  <display-name>SpringMVCDemo</display-name>
+
+  <!-- Define a servlet that this application will use -->
+  <servlet>
+    <!-- servlet-name defines the name of this servlet -->
+    <servlet-name>My Front Controller</servlet-name>
+
+    <!-- servlet-class specifies the full class name of the servlet. -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  
+    <!-- init-param allows you to pass initialization parameters to the servlet -->
+    <init-param>
+      <!-- param-name sets the name of the initialization parameter -->
+      <param-name>contextConfigLocation</param-name>
+  
+      <!-- param-value sets the value of the initialization parameter. Here, it's specifying the location of the Spring config file -->
+      <param-value>/WEB-INF/spring-mvc.xml</param-value>
+    </init-param>
+  
+    <!-- load-on-startup specifies that the servlet should be loaded automatically when the web application starts -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- Servlet mapping specifies which requests will be routed to the servlet -->
+  <servlet-mapping>
+    <!-- servlet-name should match a name defined in a servlet element -->
+    <servlet-name>DispatcherServlet</servlet-name>
+  
+    <!-- url-pattern specifies the types of URLs the servlet will handle -->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+</web-app>
