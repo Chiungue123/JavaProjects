@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>List</title>
+		<link rel="styles.css" th:href="@{styles/styles.css}"/>
+	</head>
+	<body>
+		<div th:replace="~{menu :: header}"></div>
+		<h1>This is the List Page</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Username</th>
+				<th>Birth</th>
+				<th>Status</th>
+				<th>#</th>
+				<th>#</th>
+			</tr>
+			<tr th:each="user: ${users}">
+				<th scope="row" th:text="${user.}"></th>
+				
+			</tr>
+		</table>
+	</body>
+</html>

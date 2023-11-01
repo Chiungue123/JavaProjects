@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+body {
+	padding: 20px, 50px;
+	font-size: 1.1em;
+}
+
+li {
+	font-size: 1.2em;
+}
+
+div {
+	padding: auto;
+}
+
+table, th, td {
+	border-collapse: collapse;
+}
+
+table.errorpage td {
+	vertical-align: top;
+	border: solid 1px #838;
+	padding: 10px;
+}
