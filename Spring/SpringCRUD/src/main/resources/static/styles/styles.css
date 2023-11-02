@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 body {
-	padding: 20px, 50px;
+	padding: 20px 50px;
 	font-size: 1.1em;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 li {
@@ -14,7 +15,11 @@ div {
 }
 
 table, th, td {
-	border-collapse: collapse;
+    padding: 10px;
+    text-align: left;
+    border: solid 1px #888;
+    border-collapse: collapse;
+    margin-left: 20px;
 }
 
 table.errorpage td {

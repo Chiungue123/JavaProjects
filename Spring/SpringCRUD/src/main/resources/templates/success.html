@@ -2,11 +2,20 @@
 <html xmls:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Home</title>
+		<title>Success</title>
 		<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
 	</head>
 	<body>
 		<div th:replace="~{menu :: header}"></div>
-		<h1>This is the home page</h1>
+		
+		<table>
+			<tr>
+				<th>Status</th>
+				<th>Rows Affected</th>
+				<th>Users</th>
+			</tr>
+		</table>
+		<h1>Success!</h1>
+		<h3>Rows Affected: </h3>
 	</body>
 </html>

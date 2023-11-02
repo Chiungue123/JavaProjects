@@ -7,7 +7,9 @@ server:
 logging.level:
   debug: DEBUG
   '[com.javaprojects.springcrud]': ERROR
-  # Can be DEBUG or ERROR
+  # Can be DEBUG for Development
+  # Can be ERROR after Development
+  # Can be OFF to turn the logger statemts off
 
 #Database Setting
 spring:

@@ -2,6 +2,8 @@ package com.javaprojects.springcrud.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class User {
 
     int idUser;
@@ -9,6 +11,8 @@ public class User {
     String password;
     String firstName;
     String lastName;
+    
+    @DateTimeFormat(pattern="yyy-MM-dd")
     Date birth;
     String status;
 
@@ -24,6 +28,7 @@ public class User {
         this.birth = birth;
         this.status = status;
     }
+    
     public int getIdUser() {
         return idUser;
     }
@@ -66,7 +71,6 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
     @Override
     public String toString() {
         return String.format(

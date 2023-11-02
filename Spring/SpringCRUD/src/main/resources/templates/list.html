@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>List</title>
-		<link rel="styles.css" th:href="@{styles/styles.css}"/>
+		<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
 	</head>
 	<body>
 		<div th:replace="~{menu :: header}"></div>
-		<h1>This is the List Page</h1>
+		<h1>List of Users</h1>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -19,8 +19,13 @@
 				<th>#</th>
 			</tr>
 			<tr th:each="user: ${users}">
-				<th scope="row" th:text="${user.}"></th>
-				
+				<th scope="row" th:text="${user.idUser}"/>
+				<th th:text="${user.firstName} + ' ' + ${user.lastName}"/>
+				<th th:text="${user.username}"/>
+				<th th:text="${#dates.format(user.birth, 'dd-MM-yyyy')}"/>
+				<th th:text="${user.status}"/>
+				<th><a th:href="@{/update/} + ${user.idUser}">Update</a></th>
+				<th><a th:href="@{/delete/} + ${user.idUser}">Delete</a></th>
 			</tr>
 		</table>
 	</body>
