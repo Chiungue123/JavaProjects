@@ -142,13 +142,13 @@ public class UserController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable String userID) {
+	public String delete(@PathVariable("id") String idUser) {
 
-		Integer id = Integer.parseInt(userID);
+		Integer id = Integer.parseInt(idUser);
 		this.userService.deleteUserByID(id);
 
 		logger.debug("GET: Showing search.html");
-		return "search";	
+		return "redirect:/list";
 	}
 
 	@GetMapping("/error")

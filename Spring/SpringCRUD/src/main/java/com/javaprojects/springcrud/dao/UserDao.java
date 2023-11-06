@@ -46,7 +46,7 @@ public class UserDao {
 
 	public void deleteUserByID(Integer id) {
 	
-		String sql = "DELETE USER WHERE ID_USER = ?";
+		String sql = "DELETE FROM USER WHERE ID_USER = ?";
 		
 		jdbcTemplate.update(sql, id);
 		
