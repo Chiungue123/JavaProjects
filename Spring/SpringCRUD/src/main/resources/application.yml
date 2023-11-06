@@ -6,7 +6,7 @@ server:
 #Logger
 logging.level:
   debug: DEBUG
-  '[com.javaprojects.springcrud]': ERROR
+  '[com.javaprojects.springcrud]': DEBUG
   # Can be DEBUG for Development
   # Can be ERROR after Development
   # Can be OFF to turn the logger statemts off

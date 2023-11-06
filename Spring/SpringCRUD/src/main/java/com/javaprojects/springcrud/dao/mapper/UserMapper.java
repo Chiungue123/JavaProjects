@@ -3,16 +3,21 @@ package com.javaprojects.springcrud.dao.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.javaprojects.springcrud.bean.User;
 
 public class UserMapper implements RowMapper<User> {
 
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
-		System.out.println("USER MAPPER: Map Row");
+
+		logger.debug("USER MAPPER: Map Row");
 		
 		User user = new User();
 		

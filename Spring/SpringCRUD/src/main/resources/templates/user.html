@@ -2,12 +2,12 @@
 <html xmls:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Success</title>
+		<title>User</title>
 		<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
 	</head>
 	<body>
 		<div th:replace="~{menu :: header}"></div>
-		<h2>User Successfully Created</h2>
+		<h2>User</h2>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -17,16 +17,15 @@
 				<th>Status</th>
 				<th>#</th>
 				<th>#</th>
-				<th>Rows Affected</th>
 			</tr>
 			<tr th:object="${user}">
+				<th scope="row" th:text="${user.idUser}"/>
 				<th th:text="${user.firstName} + ' ' + ${user.lastName}"/>
 				<th th:text="${user.username}"/>
 				<th th:text="${#dates.format(user.birth, 'dd-MM-yyyy')}"/>
 				<th th:text="${user.status}"/>
 				<th><a th:href="@{/update/} + ${user.idUser}">Update</a></th>
 				<th><a th:href="@{/delete/} + ${user.idUser}">Delete</a></th>
-				<th th:text="${rowsAffected}"></th>
 			</tr>
 		</table>
 	</body>

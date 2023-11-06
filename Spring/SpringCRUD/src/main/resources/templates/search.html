@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
 <html xmls:th="http://www.thymeleaf.org">
-	<meta charset="UTF-8">
-	<title>Search</title>
-	<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Search</title>
+		<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
+	</head>
 	<body>
 		<div th:replace="~{menu :: header}"></div>
-		<h1>This is the search page</h1>
+		<form action="/search/user" method="post">
+			<table>
+				<tr>
+			       <td>User ID: <input id="userID" name="userID" required></td>
+			    </tr>
+			</table>
+			<button type="submit">Submit</button>
+		</form>
 	</body>
 </html>

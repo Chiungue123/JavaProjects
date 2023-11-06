@@ -27,3 +27,11 @@ table.errorpage td {
 	border: solid 1px #838;
 	padding: 10px;
 }
+
+span.error-message {
+	color:red;
+}
+
+input[read-only] {
+	background-color: lightgray;
+}

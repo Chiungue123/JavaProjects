@@ -2,14 +2,15 @@
 <html xmls:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Create</title>
+		<title>Update</title>
 		<link rel="stylesheet" th:href="@{/styles/styles.css}"/>
 	</head>
 	<body>
 	  <div th:replace="~{menu :: header}"></div>
-	  <h1>User Creation Form</h1>
-	  <form action="/create" th:object="${user}" method="post">
+	  <h1>Update User Form</h1>
+	  <form action="/update" th:object="${user}" method="post">
 	    <table class="user">
+		  <input type="hidden" th:field="*{idUser}"/>
 	      <tr>
 	        <th>First Name:</th>
 	        <td><input type="text" th:field="*{firstName}" required></td>
@@ -26,16 +27,12 @@
 	        </td>
 	      </tr>
 	      <tr>
-	        <th>Password:</th>
-	        <td><input type="password" th:field="*{password}" required></td>
-	      </tr>
-	      <tr>
 	        <th>Birth:</th>
 	        <td><input type="date" th:field="*{birth}" required></td>
 	      </tr>
 	      <tr>
 	          <td colspan="2">
-	              <input type="submit" value="Create">
+	              <input type="submit" value="Update">
 	          </td>
 	      </tr>
 	    </table>
