@@ -38,11 +38,11 @@ public class UserController {
 	String create(User user) {
 		
 		logger.debug("Showing create");
-		return "create";	
+		return "create";
 	}
 	
 	@PostMapping("/create")
-	ModelAndView success(@ModelAttribute("user") User user, BindingResult result) {
+	ModelAndView create(@ModelAttribute("user") User user, BindingResult result) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -52,7 +52,6 @@ public class UserController {
 	    }
 
 	    int rowsAffected = userService.createUser(user);
-	    modelAndView.addObject("rowsAffected", rowsAffected);
 	    modelAndView.addObject("user", user);
 	    modelAndView.setViewName("success");
 
@@ -109,7 +108,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/update/{id}") 
+	@GetMapping("/update/{id}")
 	ModelAndView update(@PathVariable("id") String idUser) {
 		
 		ModelAndView modelAndView = new ModelAndView();

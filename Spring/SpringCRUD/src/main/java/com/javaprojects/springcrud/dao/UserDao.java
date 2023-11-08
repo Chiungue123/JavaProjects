@@ -61,7 +61,5 @@ public class UserDao {
         							  user.getLastName(),
         							  user.getBirth(), 
         							  user.getIdUser());
-		
 	}
-
 }

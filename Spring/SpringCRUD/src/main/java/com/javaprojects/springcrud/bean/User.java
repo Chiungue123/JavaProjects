@@ -12,7 +12,7 @@ public class User {
     String firstName;
     String lastName;
     
-    @DateTimeFormat(pattern="yyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     Date birth;
     String status;
 
