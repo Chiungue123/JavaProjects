@@ -84,30 +84,31 @@ public class UserService {
             throw new RuntimeException("Invalid User Data: " + user);
         }
     }
-    
-    /*
-    public void createUser(User user) {
-        this.validateUser(user);
-        user.setStatus("A");
-        this.userRepository.save(user);
-    }
-    
-    public void updateUser(User user) {
-   
-    	this.validateUser(user);
-        this.userRepository.findById(user.getIdUser())
-	        .ifPresent(u -> {
-	        	u.setUsername(user.getUsername());
-	        	u.setFirstName(user.getFirstName());
-	        	u.setLastName(user.getLastName());
-	        	u.setBirth(user.getBirth());
-	        	
-	        	this.userRepository.save(u);
-	        });
-    }
 
-    public void deleteUser(int idUser) {
-    	this.userRepository.deleteById(idUser);
-    }
-    */
+	public User updateUser(com.javaprojects.soapdemo.jpa.User user) {
+		
+		this.validateUser(user);
+		
+		this.userRepository.findById(user.getIdUser())
+						.ifPresent(u -> {
+							u.setIdUser(user.getIdUser());
+							u.setUsername(user.getUsername());
+							u.setFirstName(user.getFirstName());
+							u.setLastName(user.getLastName());
+							u.setBirth(user.getBirth());
+							
+							this.userRepository.save(u);
+						});
+		
+		return UserService.mapUser(user);
+	}
+
+	public void deleteUser(int idUser) {
+		
+		this.userRepository.findById(idUser)
+					.ifPresent(u -> {
+						this.userRepository.delete(u);
+					});
+	}
+
 }
