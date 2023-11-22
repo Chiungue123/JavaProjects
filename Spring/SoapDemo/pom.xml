@@ -9,11 +9,11 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>com.simplilearn</groupId>
-  <artifactId>simplilearn-01-spring-soap-jpa</artifactId>
+  <groupId>com.javaprojects</groupId>
+  <artifactId>soapdemo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>simplilearn-01-spring-soap-jpa</name>
+  <name>SoapDemo</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
