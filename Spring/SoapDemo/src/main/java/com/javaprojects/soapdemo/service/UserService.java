@@ -1,5 +1,6 @@
 package com.javaprojects.soapdemo.service;
 
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> list() {
+    public List<User> listUsers() {
         return this.userRepository.findAll()
     						  .stream()
     						  .map(UserService::mapUser)
@@ -73,6 +74,7 @@ public class UserService {
             throw new RuntimeException("Invalid User Data: " + user);
         }
     }
+
     
     /*
     public void createUser(User user) {
